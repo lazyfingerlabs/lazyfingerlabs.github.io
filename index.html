@@ -16,12 +16,79 @@
             height: 100vh; 
             margin: 0; 
         }
-        h1 { font-size: 3rem; margin-bottom: 10px; }
-        p { color: #8b949e; font-size: 1.2rem; }
+        h1 { 
+            font-size: 3rem; 
+            margin-bottom: 10px; 
+            text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
+        }
+        p { 
+            color: #8b949e; 
+            font-size: 1.2rem; 
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 600px;
+        }
+        
+        .social-link {
+            background-color: #161b22;
+            color: #00E676;
+            padding: 10px 20px;
+            border: 1px solid #30363d;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-link:hover {
+            background-color: #00E676;
+            color: #0D1117;
+            border-color: #00E676;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .link-category {
+            width: 100%;
+            text-align: center;
+            color: #484f58;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
     </style>
 </head>
 <body>
     <h1>LazyFinger Labs</h1>
     <p>Building AI Tools & Independent Games</p>
+
+    <div class="links-container">
+        <!-- Dükkan & Açık Kaynak -->
+        <div class="link-category">// Dükkan & Karargah</div>
+        <a href="https://lazyfinger-labs.itch.io" target="_blank" class="social-link">itch.io</a>
+        <a href="https://github.com/lazyfingerlabs" target="_blank" class="social-link">GitHub</a>
+        
+        <!-- Topluluk & Video -->
+        <div class="link-category">// Topluluk & Medya</div>
+        <a href="https://www.reddit.com/user/LazyFingerLabs/" target="_blank" class="social-link">Reddit</a>
+        <a href="https://www.youtube.com/@LazyFingerLabs" target="_blank" class="social-link">YouTube</a>
+        <a href="https://x.com/LazyFingerLabs" target="_blank" class="social-link">X (Twitter)</a>
+        
+        <!-- Algoritma Vitrini -->
+        <div class="link-category">// Vitrin</div>
+        <a href="https://www.instagram.com/lazyfingerlabs/" target="_blank" class="social-link">Instagram</a>
+        <a href="https://www.tiktok.com/@lazyfingerlabs" target="_blank" class="social-link">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61595426073394" target="_blank" class="social-link">Facebook</a>
+    </div>
 </body>
 </html>
