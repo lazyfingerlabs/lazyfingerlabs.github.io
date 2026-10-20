@@ -1,94 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LazyFinger Labs</title>
-    <style>
-        body { 
-            background-color: #0D1117; 
-            color: #00E676; 
-            font-family: monospace; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            margin: 0; 
-        }
-        h1 { 
-            font-size: 3rem; 
-            margin-bottom: 10px; 
-            text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
-        }
-        p { 
-            color: #8b949e; 
-            font-size: 1.2rem; 
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        
-        .links-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            max-width: 600px;
-        }
-        
-        .social-link {
-            background-color: #161b22;
-            color: #00E676;
-            padding: 10px 20px;
-            border: 1px solid #30363d;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .social-link:hover {
-            background-color: #00E676;
-            color: #0D1117;
-            border-color: #00E676;
-            box-shadow: 0 0 15px rgba(0, 230, 118, 0.6);
-            transform: translateY(-2px);
-        }
-        
-        .link-category {
-            width: 100%;
-            text-align: center;
-            color: #484f58;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LazyFinger Labs – Free Browser Games Made with AI</title>
+<meta name="description" content="LazyFinger Labs makes small games you can play free in your browser, on phone or computer. Built with AI (Claude Code), HTML5 and Godot.">
+<meta property="og:title" content="LazyFinger Labs – Free Browser Games">
+<meta property="og:description" content="Eleven small games, free in your browser. Built with AI (Claude Code), HTML5 and Godot.">
+<meta property="og:image" content="https://lazyfingerlabs.github.io/img/og.jpg">
+<meta property="og:url" content="https://lazyfingerlabs.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root { --bg: #0d1117; --panel: #161b22; --line: #30363d; --green: #00e676; --text: #e6edf3; --muted: #8b949e; --dim: #484f58; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  .mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+
+  header { padding: 64px 0 40px; text-align: center; }
+  h1 { font-family: ui-monospace, Menlo, Consolas, monospace; color: var(--green); font-size: clamp(2.2rem, 7vw, 3.4rem); margin: 0 0 8px; text-shadow: 0 0 18px rgba(0, 230, 118, 0.3); }
+  .tagline { color: var(--muted); font-size: 1.15rem; margin: 0 auto 28px; max-width: 560px; }
+  .cta { display: inline-block; background: var(--green); color: #0d1117; font-weight: 700; padding: 12px 26px; border-radius: 8px; text-decoration: none; }
+  .cta:hover { box-shadow: 0 0 18px rgba(0, 230, 118, 0.55); }
+
+  .socials { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
+  .socials a { font-family: ui-monospace, Menlo, Consolas, monospace; background: var(--panel); color: var(--green); border: 1px solid var(--line); border-radius: 6px; padding: 8px 16px; text-decoration: none; font-size: 0.95rem; transition: all 0.2s ease; }
+  .socials a:hover { background: var(--green); color: var(--bg); border-color: var(--green); transform: translateY(-2px); }
+
+  section { padding: 32px 0; }
+  h2 { font-family: ui-monospace, Menlo, Consolas, monospace; color: var(--dim); font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin: 0 0 16px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .filters button { font: inherit; font-size: 0.9rem; background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+  .filters button.on { background: var(--green); color: var(--bg); border-color: var(--green); font-weight: 600; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+  .game { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: transform 0.2s ease, border-color 0.2s ease; }
+  .game:hover { transform: translateY(-3px); border-color: var(--green); }
+  .game img { width: 100%; height: auto; aspect-ratio: 630 / 500; object-fit: cover; display: block; background: #0b0f14; }
+  .game .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .game h3 { margin: 0; font-size: 1.1rem; }
+  .game p { margin: 0; color: var(--muted); font-size: 0.92rem; flex: 1; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.78rem; }
+  .meta span { border: 1px solid var(--line); border-radius: 4px; padding: 1px 7px; color: var(--muted); }
+  .meta .g { color: var(--green); border-color: rgba(0, 230, 118, 0.4); }
+  .play { margin-top: 4px; font-weight: 600; color: var(--green); font-size: 0.92rem; }
+
+  .videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+  .video { text-decoration: none; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .video:hover { border-color: var(--green); }
+  .video .thumb { position: relative; }
+  .video img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+  .video .thumb::after { content: "▶"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 2.2rem; color: #fff; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); }
+  .video div.t { padding: 10px 14px; font-size: 0.95rem; }
+
+  .about { color: var(--muted); max-width: 720px; }
+  .about strong { color: var(--text); }
+  footer { border-top: 1px solid var(--line); margin-top: 32px; padding: 24px 0 40px; color: var(--dim); font-size: 0.85rem; text-align: center; }
+</style>
 </head>
 <body>
-    <h1>LazyFinger Labs</h1>
-    <p>Building AI Tools & Independent Games</p>
+<header class="wrap">
+  <h1>LazyFinger Labs</h1>
+  <p class="tagline">Small games you can play free in your browser, on phone or computer. Built with AI.</p>
+  <a class="cta" href="https://lazyfinger-labs.itch.io" target="_blank" rel="noopener">Play on itch.io</a>
+  <nav class="socials" aria-label="LazyFinger Labs elsewhere">
+    <a href="https://www.youtube.com/@LazyFingerLabs" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://lazyfinger-labs.itch.io" target="_blank" rel="noopener">itch.io</a>
+    <a href="https://www.tiktok.com/@lazyfingerlabs" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.instagram.com/lazyfingerlabs/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://x.com/LazyFingerLabs" target="_blank" rel="noopener">X</a>
+    <a href="https://www.reddit.com/user/LazyFingerLabs/" target="_blank" rel="noopener">Reddit</a>
+    <a href="https://www.facebook.com/profile.php?id=61595426073394" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://github.com/lazyfingerlabs" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+</header>
 
-    <div class="links-container">
-        <!-- Dükkan & Açık Kaynak -->
-        <div class="link-category">// Dükkan & Karargah</div>
-        <a href="https://lazyfinger-labs.itch.io" target="_blank" class="social-link">itch.io</a>
-        <a href="https://github.com/lazyfingerlabs" target="_blank" class="social-link">GitHub</a>
-        
-        <!-- Topluluk & Video -->
-        <div class="link-category">// Topluluk & Medya</div>
-        <a href="https://www.reddit.com/user/LazyFingerLabs/" target="_blank" class="social-link">Reddit</a>
-        <a href="https://www.youtube.com/@LazyFingerLabs" target="_blank" class="social-link">YouTube</a>
-        <a href="https://x.com/LazyFingerLabs" target="_blank" class="social-link">X (Twitter)</a>
-        
-        <!-- Algoritma Vitrini -->
-        <div class="link-category">// Vitrin</div>
-        <a href="https://www.instagram.com/lazyfingerlabs/" target="_blank" class="social-link">Instagram</a>
-        <a href="https://www.tiktok.com/@lazyfingerlabs" target="_blank" class="social-link">TikTok</a>
-        <a href="https://www.facebook.com/profile.php?id=61595426073394" target="_blank" class="social-link">Facebook</a>
-    </div>
+<main class="wrap">
+  <section id="games">
+    <h2>// Games</h2>
+    <div class="filters" role="group" aria-label="Filter by genre"></div>
+    <div class="grid"></div>
+  </section>
+
+  <section id="videos">
+    <h2>// Videos</h2>
+    <div class="videos"></div>
+  </section>
+
+  <section id="about">
+    <h2>// About</h2>
+    <p class="about">LazyFinger Labs is a one-person studio that builds games together with AI. The code is written with <strong>Claude Code</strong>, the art and sound are drawn and synthesized in code, and the games run as plain <strong>HTML5</strong> or <strong>Godot</strong> in your browser. No download, no sign-up: press play.</p>
+  </section>
+</main>
+
+<footer class="wrap mono">© LazyFinger Labs · made with AI</footer>
+
+<script>
+  // [itch slug, title, genre, one line, plays on]
+  const GAMES = [
+    ['loothaven', 'Loothaven', 'RPG', 'Pixel-art RPG: three classes, seven lands, three dungeons, ten bosses and a dragon.', 'Phone + PC'],
+    ['swarm-survivor', 'Swarm Survivor', 'Action', 'You shoot by yourself, you just move. Grab gems, pick upgrades, outlast the swarm and its Queen.', 'Phone + PC'],
+    ['tower-guard', 'Tower Guard', 'Strategy', 'Build bolt, cannon and frost towers and hold the keep against growing waves.', 'Phone + PC'],
+    ['last-stand-arena', 'Last Stand Arena', 'Action', 'Hold the arena against endless waves. Chain kills for combos, pick an upgrade after every wave.', 'PC'],
+    ['deep-vein', 'Deep Vein', 'Idle', 'Tap the rock, hire machines and dig through five layers to the core.', 'Phone + PC'],
+    ['gem-swap', 'Gem Swap', 'Puzzle', 'Swap gems against the clock. Four make a line gem, five a nova. Chain the cascades.', 'Phone + PC'],
+    ['bubble-pop', 'Bubble Pop', 'Puzzle', 'Aim, bank off the walls and match three. Cut whole clusters loose before the ceiling comes down.', 'Phone + PC'],
+    ['color-sort', 'Color Sort', 'Puzzle', 'Pour colours between glass tubes until each holds one. From level four, some layers start hidden.', 'Phone + PC'],
+    ['block-fit', 'Block Fit', 'Puzzle', 'Fit the pieces, light up the lines, chain the combos.', 'Phone + PC'],
+    ['orbit-flip', 'Orbit Flip', 'Action', 'One tap flips you across the ring. Dodge the spikes, skim them for bonus points.', 'Phone + PC'],
+    ['neon-vanguard', 'Neon Vanguard', 'Action', 'A top-down space shooter: steer with WASD, aim with the mouse, hold out against waves of fighters.', 'PC'],
+  ];
+  // [YouTube id, title]
+  const VIDEOS = [
+    ['QFcWHxeGcWY', 'Loothaven trailer'],
+    ['v_vd8ExkGGc', 'Last Stand Arena trailer'],
+    ['6i_t8-VaM1k', 'Block Fit trailer'],
+    ['ZFBRsj5jjWM', 'Orbit Flip trailer'],
+  ];
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const grid = document.querySelector('.grid'), filters = document.querySelector('.filters');
+  const show = (genre) => {
+    grid.innerHTML = GAMES.filter((g) => genre === 'All' || g[2] === genre).map(([id, title, genre, line, on]) =>
+      `<a class="game" href="https://lazyfinger-labs.itch.io/${id}" target="_blank" rel="noopener">
+        <img src="img/${id}.webp" alt="${esc(title)} cover" loading="lazy" width="630" height="500">
+        <div class="body"><h3>${esc(title)}</h3><div class="meta"><span class="g">${genre}</span><span>${on}</span></div><p>${esc(line)}</p><span class="play">Play free →</span></div>
+      </a>`).join('');
+    filters.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.g === genre));
+  };
+  filters.innerHTML = ['All', ...new Set(GAMES.map((g) => g[2]))].map((g) => `<button type="button" data-g="${g}">${g}</button>`).join('');
+  filters.addEventListener('click', (e) => { if (e.target.dataset.g) show(e.target.dataset.g); });
+  show('All');
+  document.querySelector('.videos').innerHTML = VIDEOS.map(([id, title]) =>
+    `<a class="video" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">
+      <div class="thumb"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"></div><div class="t">${esc(title)}</div>
+    </a>`).join('');
+</script>
 </body>
 </html>
